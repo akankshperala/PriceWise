@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getLowestPrice, getHighestPrice, getAveragePrice, getEmailNotifType } from "@/lib/utils";
-import { connectDB } from "@/lib/mongoose";
+import { connectDb} from "@/lib/mongoose";
 import Product from "@/lib/models/product.model";
 import { scrapeAmazonProduct } from "@/lib/scraper";
 import { generateEmailBody, sendEmail } from "@/lib/nodemailer";
@@ -12,7 +12,7 @@ export const revalidate = 0;
 
 export async function GET(request) {
   try {
-    await connectDB();
+    await connectDb();
 
     const products = await Product.find({});
 
