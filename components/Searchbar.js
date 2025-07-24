@@ -1,8 +1,10 @@
 "use client"
 import { scrapeAndStoreProduct } from '@/lib/actions'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const Searchbar = () => {
+  const router=useRouter()
   const [searchPrompt, setSearchPrompt] = useState('')
   const [Loading, setLoading] = useState(false)
   const isValidAmazonProductURL = (url) => {
@@ -25,6 +27,7 @@ const Searchbar = () => {
     try {
       setLoading(true)
       const product = await scrapeAndStoreProduct(searchPrompt)
+      router.push(`/products/${product}`)
     } catch (error) {
 
     } finally {
